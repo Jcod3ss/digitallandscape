@@ -2,18 +2,27 @@ let x = 100;
 let y = 280;
 
 let isNight = false;
-let xWasPressed = false;
+let yWasPressed = false;
+let bWasPressed = false;
+let soundOn = true;
 
-let sound;
+let windSound;
+let cricketSound;
+
+
+function preload(){
+  //sound files
+  windSound = loadSound("wind.mp3");
+  cricketSound = loadSound("crickets.mp3");
+}
+
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
   
   //sound
-  sound = new p5.Oscillator("sine")
-  sound.freq(300);
-  sound.amp(0);
-  sound.start();
+  windSound.setVolume(0.3);
+  cricketSound.setVolume(0.4);
 }
 
 function draw(){
@@ -50,10 +59,15 @@ function draw(){
     fill(90, 100, 170);
   }
   
-  triangle(
+ triangle(
     width * 0.05, height * 0.75,
     width * 0.3, height * 0.3,
   width * 0.55, height * 0.75);
+  
+  triangle(
+  width * 0.4, height * 0.75,
+  width * 0.7, height * 0.35,
+  width * 0.97, height * 0.75);
   
   //floor
   if (isNight){
@@ -90,33 +104,44 @@ function draw(){
     if(controller.buttons[15].pressed){
       x = x + 3;
     }
-    // x button changes time of day
-    let xPressed = controller.buttons[2].pressed;
+    // y button changes time of day
+    let yPressed = controller.buttons[2].pressed;
     
-    if(xPressed && !xWasPressed){
+    if(yPressed && !yWasPressed){
       isNight = !isNight;
-    }
-    xWasPressed = xPressed;
-    
-    //a button is sound
-    if (controller.buttons[0].pressed){
-      userStartAudio();
-      
-      if(isNight){
-        sound.freq(800);
-      }else{
-        sound.freq(300);
-      }
-      sound.amp(0.2, 0.05);
-      sound.amp(0, 0.3);
+     
+     if (soundOn) {
+      changeSound();
     }
   }
+    
+    yWasPressed = yPressed;
+    
+    //b button is sound
+   
+    let bPressed = controller.buttons[0].pressed;
+    
+    if (bPressed && !bWasPressed){
+      userStartAudio();
+      
+      soundOn = !soundOn;
+      
+      if (soundOn) {
+        changeSound();
+      }else{
+        windSound.stop();
+        cricketSound.stop();
+      }
+    }
+    bWasPressed = bPressed;
+  }
+  
+  
     // bird stays inside canvas
-    x = constrain(x, 20, width - 20);
+    x = constrain(x, 20, width - 35);
     y = constrain(y, 20, height * 0.75 - 20);
     
     //bird
-    if(isNight){
       
       //bird body
       fill(100, 200, 255);
@@ -140,11 +165,7 @@ function draw(){
       //wings
       fill(50, 140, 200);
       ellipse(x - 3, y, 22, 12);
-    }else{
-      //pink color
-      fill(255, 100, 150);
-      circle(x, y, 35);
-    }
+  
     
     //on screen instructions
     fill(255);
@@ -152,10 +173,20 @@ function draw(){
     textAlign(LEFT);
     
     text("left stick move", 15, 25);
-    text("x button changes day to night", 15, 48);
-    text("a button plays sound", 15, 71);
+    text("y button changes day to night", 15, 48);
+    text("b button pauses plays sound", 15, 71);
   }
-  //canvas to fit window
-  function windowResized(){
-    reSizeCanvas(windowWidth, windowHeight);
+
+//change wind and cricket sound
+function changeSound(){
+  windSound.stop();
+  cricketSound.stop();
+  
+  if (soundOn) {
+  if (isNight) {
+    cricketSound.loop();
+  }else{
+    windSound.loop();
   }
+ }
+}
