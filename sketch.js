@@ -43,11 +43,11 @@ function draw(){
     
     //stars
     fill(255);
-    circle(width * 0.15, height * 0,12, 4);
-     circle(width * 0.35, height * 0,2, 4);
-     circle(width * 0.55, height * 0,1, 4);
-     circle(width * 0.7, height * 0.3, 4);
-     circle(width * 0.9, height * 0,08, 4);
+    circle(width * 0.15, height * 0.12, 4);
+     circle(width * 0.35, height * 0.18, 4);
+     circle(width * 0.55, height * 0.8, 4);
+     circle(width * 0.7, height * 0.11, 4);
+     circle(width * 0.9, height * 0.20, 4);
     
   }else{
     fill(255, 220, 80);
