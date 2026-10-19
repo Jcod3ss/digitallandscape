@@ -13,7 +13,6 @@ let cricketSound;
 function preload(){
   bird = loadImage("bird.png");
   
-  //sound files
   windSound = loadSound("wind.mp3");
   cricketSound = loadSound("crickets.mp3");
 }
@@ -144,7 +143,6 @@ function draw(){
     y = constrain(y, 20, height * 0.75 - 20);
     
     //Angry bird
-      
       imageMode(CENTER);
   image(bird, x, y, 60, 60);
   
