@@ -1,5 +1,6 @@
 let x = 100;
 let y = 280;
+let bird;
 
 let isNight = false;
 let yWasPressed = false;
@@ -9,8 +10,9 @@ let soundOn = true;
 let windSound;
 let cricketSound;
 
-
 function preload(){
+  bird = loadImage("bird.png");
+  
   //sound files
   windSound = loadSound("wind.mp3");
   cricketSound = loadSound("crickets.mp3");
@@ -141,30 +143,10 @@ function draw(){
     x = constrain(x, 20, width - 35);
     y = constrain(y, 20, height * 0.75 - 20);
     
-    //bird
+    //Angry bird
       
-      //bird body
-      fill(100, 200, 255);
-      ellipse(x, y, 40, 25);
-      
-      //bird head
-      fill(130, 220, 255);
-      circle(x + 12, y - 10, 22);
-      
-      //bird eye
-      fill(255);
-      circle(x + 18, y - 12, 4);
-      
-      //bird beak
-      fill(255, 180, 0);
-      triangle(
-      x + 22, y - 8,
-      x + 34, y - 4,
-      x + 22, y);
-      
-      //wings
-      fill(50, 140, 200);
-      ellipse(x - 3, y, 22, 12);
+      imageMode(CENTER);
+  image(bird, x, y, 60, 60);
   
     
     //on screen instructions
