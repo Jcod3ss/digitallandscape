@@ -10,16 +10,13 @@ let soundOn = true;
 let windSound;
 let cricketSound;
 
-function preload(){
+
+function setup(){
+  createCanvas(windowWidth, windowHeight);
   bird = loadImage("bird.png");
   
   windSound = loadSound("wind.mp3");
   cricketSound = loadSound("crickets.mp3");
-}
-
-
-function setup(){
-  createCanvas(windowWidth, windowHeight);
   
   //sound
   windSound.setVolume(0.3);
@@ -86,24 +83,25 @@ function draw(){
     
     //left stick moves bird
     if (controller.axes[0] < -0.3){
-      x = x - 3;
+      x -= 3;
     }
     if(controller.axes[0] > 0.3){
-      x = x + 3;
+      x += 3;
     }
     if(controller.axes[1] < -0.3){
-      y = y - 3;
+      y -= 3;
     }
     if(controller.axes[1] > 0.3){
-      y = y + 3;
+      y += 3;
     }
     
     //d pad move left and right
     if(controller.buttons[14].pressed){
-      x = x - 3;
+      x -= 3;
+
     }
     if(controller.buttons[15].pressed){
-      x = x + 3;
+      x += 3;
     }
     // y button changes time of day
     let yPressed = controller.buttons[2].pressed;
@@ -145,7 +143,7 @@ function draw(){
     //Angry bird
       imageMode(CENTER);
   image(bird, x, y, 60, 60);
-  
+
     
     //on screen instructions
     fill(255);
