@@ -6,14 +6,15 @@ let isNight = false;
 let yWasPressed = false;
 let bWasPressed = false;
 let soundOn = true;
+let showFlower = false;
 let aWasPressed = false;
+
 
 let windSound;
 let cricketSound;
 
 let flowerX = 200;
 let flowerY = 500;
-let showFlower = false;
 
 
 function preload(){
@@ -25,17 +26,6 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
   windSound.setVolume(0.3);
   cricketSound.setVolume(0.4);
-//}
-//function setup(){
-  //createCanvas(windowWidth, windowHeight);
-  //bird = loadImage("bird.png");
-  
- // windSound = loadSound("wind.mp3");
- // cricketSound = loadSound("crickets.mp3");
-  
-  //sound
- // windSound.setVolume(0.3);
- // cricketSound.setVolume(0.4);
 }
 
 function draw(){
@@ -152,19 +142,28 @@ function draw(){
   
   //A button creates flower
   let aPressed = controller.buttons[1].pressed;
-  
+
   if(aPressed && !aWasPressed){
-    showFlower = true;
+    showFlower = !showFlower;
   }
   aWasPressed = aPressed;
 }
     // bird stays inside canvas
     x = constrain(x, 20, width - 35);
     y = constrain(y, 20, height * 0.75 - 20);
-    
+  
     //Angry bird
       imageMode(CENTER);
   image(bird, x, y, 60, 60);
+
+  //draw flower
+  if(showflower){
+    fill(255,150,180);
+    circle(flowerX,flowerY,15);
+    
+    fill(255,220,50);
+   circle(flowerX,flowerY,8);
+ }
 
     
     //on screen instructions
