@@ -10,17 +10,26 @@ let soundOn = true;
 let windSound;
 let cricketSound;
 
-
-function setup(){
-  createCanvas(windowWidth, windowHeight);
+function preload(){
   bird = loadImage("bird.png");
-  
   windSound = loadSound("wind.mp3");
   cricketSound = loadSound("crickets.mp3");
-  
-  //sound
+}
+function setup(){
+  createCanvas(windowWidth, windowHeight);
   windSound.setVolume(0.3);
   cricketSound.setVolume(0.4);
+//}
+//function setup(){
+  //createCanvas(windowWidth, windowHeight);
+  //bird = loadImage("bird.png");
+  
+ // windSound = loadSound("wind.mp3");
+ // cricketSound = loadSound("crickets.mp3");
+  
+  //sound
+ // windSound.setVolume(0.3);
+ // cricketSound.setVolume(0.4);
 }
 
 function draw(){
