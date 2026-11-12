@@ -6,9 +6,15 @@ let isNight = false;
 let yWasPressed = false;
 let bWasPressed = false;
 let soundOn = true;
+let aWasPressed = false;
 
 let windSound;
 let cricketSound;
+
+let flowerX = 200;
+let flowerY = 500;
+let showFlower = false;
+
 
 function preload(){
   bird = loadImage("bird.png");
@@ -142,9 +148,16 @@ function draw(){
       }
     }
     bWasPressed = bPressed;
+  //}
+  
+  //A button creates flower
+  let aPressed = controller.buttons[1].pressed;
+  
+  if(aPressed && !aWasPressed){
+    showFlower = true;
   }
-  
-  
+  aWasPressed = aPressed;
+}
     // bird stays inside canvas
     x = constrain(x, 20, width - 35);
     y = constrain(y, 20, height * 0.75 - 20);
@@ -162,6 +175,7 @@ function draw(){
     text("left stick move", 15, 25);
     text("y button changes day to night", 15, 48);
     text("b button pauses plays sound", 15, 71);
+  text("A button grows a flower", 15, 94);
   }
 
 //change wind and cricket sound
