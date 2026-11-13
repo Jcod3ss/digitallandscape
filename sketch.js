@@ -6,15 +6,10 @@ let isNight = false;
 let yWasPressed = false;
 let bWasPressed = false;
 let soundOn = true;
-let showFlower = false;
-let aWasPressed = false;
 
 
 let windSound;
 let cricketSound;
-
-let flowerX = 200;
-let flowerY = 500;
 
 
 function preload(){
@@ -84,6 +79,7 @@ function draw(){
   let controllers = navigator.getGamepads();
   let controller = controllers[0];
   
+  
   if(controller){
     
     //left stick moves bird
@@ -138,16 +134,8 @@ function draw(){
       }
     }
     bWasPressed = bPressed;
-  //}
-  
-  //A button creates flower
-  let aPressed = controller.buttons[1].pressed;
-
-  if(aPressed && !aWasPressed){
-    showFlower = !showFlower;
   }
-  aWasPressed = aPressed;
-}
+
     // bird stays inside canvas
     x = constrain(x, 20, width - 35);
     y = constrain(y, 20, height * 0.75 - 20);
@@ -156,16 +144,7 @@ function draw(){
       imageMode(CENTER);
   image(bird, x, y, 60, 60);
 
-  //draw flower
-  if(showflower){
-    fill(255,150,180);
-    circle(flowerX,flowerY,15);
-    
-    fill(255,220,50);
-   circle(flowerX,flowerY,8);
- }
 
-    
     //on screen instructions
     fill(255);
     textSize(15);
@@ -174,9 +153,8 @@ function draw(){
     text("left stick move", 15, 25);
     text("y button changes day to night", 15, 48);
     text("b button pauses plays sound", 15, 71);
-  text("A button grows a flower", 15, 94);
-  }
-
+ 
+}
 //change wind and cricket sound
 function changeSound(){
   windSound.stop();
